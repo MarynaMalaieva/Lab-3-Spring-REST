@@ -11,8 +11,8 @@ data class Way(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Long,
-    val startPoint: String,
-    val destination: String,
+    var startPoint: String,
+    var destination: String,
     val type: String,
     val dateOfDeparture: LocalDate,
     val roadLength: Int,
