@@ -19,15 +19,14 @@ class WayServiceImpl(private val wayRepository: WayRepository) : WayService {
 
     @PreAuthorize("permitAll()")
     override fun getWayById(id: Long): WayResponse {
-        val drugs = wayRepository.findById(id).orElseThrow()
-        return WayResponse.fromEntity(drugs)
+        val way = wayRepository.findById(id).orElseThrow()
+        return WayResponse.fromEntity(way)
     }
 
-    @PreAuthorize("hasAuthority('EDITOR')")
-    override fun updateWay(id: Long, drugsRequest: WayRequest): WayResponse {
+    override fun updateWay(id: Long, request: WayRequest): WayResponse {
         val way = wayRepository.findById(id).orElseThrow()
-        way.startPoint = drugsRequest.startPoint.toString()
-        way.destination = drugsRequest.destination.toString()
+        way.startPoint = request.startPoint
+        way.destination = request.destination
         val updatedWay = wayRepository.save(way)
         return WayResponse.fromEntity(updatedWay)
     }

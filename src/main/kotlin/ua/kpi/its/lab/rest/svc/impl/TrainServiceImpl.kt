@@ -13,14 +13,14 @@ class TrainServiceImpl(private val trainRepository: TrainRepository) : TrainServ
     @PreAuthorize("hasAuthority('EDITOR')")
     override fun createTrain(trainRequest: TrainRequest): TrainResponse {
         val train = Train(model = trainRequest.model, manufacturer = trainRequest.manufacturer)
-        val savedHospital = trainRepository.save(train)
-        return TrainResponse.fromEntity(savedHospital)
+        val newTrain = trainRepository.save(train)
+        return TrainResponse.fromEntity(newTrain)
     }
 
     @PreAuthorize("permitAll()")
     override fun getTrainById(id: Long): TrainResponse {
-        val hospital = trainRepository.findById(id).orElseThrow()
-        return TrainResponse.fromEntity(hospital)
+        val train = trainRepository.findById(id).orElseThrow()
+        return TrainResponse.fromEntity(train)
     }
 
     @PreAuthorize("hasAuthority('EDITOR')")
