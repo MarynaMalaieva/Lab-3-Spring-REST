@@ -17,7 +17,7 @@ data class Train(
     val numOfSeats: Int,
     val weight: Int,
     val withConditioning: Boolean,
-    @OneToMany(mappedBy = "train", cascade = [CascadeType.ALL], orphanRemoval = true)
+    @OneToOne(mappedBy = "train", cascade = [CascadeType.ALL], orphanRemoval = true)
     val way: Way,
 ) : Comparable<Train> {
     override fun compareTo(train: Train): Int {

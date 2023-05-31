@@ -18,7 +18,7 @@ data class Way(
     val roadLength: Int,
     val ticketPrice: Double,
     val circular: Boolean,
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "train_id")
     val train: Train
 ) : Comparable<Way> {

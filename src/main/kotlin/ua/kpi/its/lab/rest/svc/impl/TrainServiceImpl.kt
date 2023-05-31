@@ -11,13 +11,13 @@ import ua.kpi.its.lab.rest.svc.TrainService
 class TrainServiceImpl(private val trainRepository: TrainRepository) : TrainService {
     override fun createTrain(trainRequest: TrainRequest): TrainResponse {
         val train = Train(model = trainRequest.model, manufacturer = trainRequest.manufacturer)
-        val savedHospital = trainRepository.save(train)
-        return TrainResponse.fromEntity(savedHospital)
+        val newTrain = trainRepository.save(train)
+        return TrainResponse.fromEntity(newTrain)
     }
 
     override fun getTrainById(id: Long): TrainResponse {
-        val hospital = trainRepository.findById(id).orElseThrow()
-        return TrainResponse.fromEntity(hospital)
+        val train = trainRepository.findById(id).orElseThrow()
+        return TrainResponse.fromEntity(train)
     }
 
     override fun updateTrain(id: Long, trainRequest: TrainRequest): TrainResponse {
